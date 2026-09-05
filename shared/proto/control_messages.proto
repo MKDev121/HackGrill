@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package voip.translation;
+
+enum MessageType {
+  MSG_UNKNOWN = 0;
+  MSG_SESSION_INIT = 1;
+  MSG_SESSION_STOP = 2;
+  MSG_CONFIG_UPDATE = 3;
+  MSG_TRANSCRIPT_EVENT = 4;
+  MSG_METRICS_UPDATE = 5;
+  MSG_HEARTBEAT = 6;
+  MSG_ERROR_ALERT = 7;
+}
+
+enum TranslationMode {
+  MODE_TRANSCRIBE_ONLY = 0;
+  MODE_TRANSLATE_TO_ENGLISH = 1;
+  MODE_TRANSLATE_INDIC_TO_INDIC = 2;
+}
+
+enum SpeakerRole {
+  SPEAKER_LOCAL = 0;
+  SPEAKER_REMOTE = 1;
+}
+
+message SessionInitRequest {
+  string session_id = 1;
+  string remote_host = 2;
+  uint32 remote_port = 3;
+  uint32 local_port = 4;
+  string codec = 5;
+  string source_language = 6;
+  string target_language = 7;
+  TranslationMode mode = 8;
+}
+
+message ConfigUpdateRequest {
+  string source_language = 1;
+  string target_language = 2;
+  uint32 chunk_size_ms = 3;
+  float vad_sensitivity = 4;
+}
+
+message LatencyBreakdown {
+  float asr_ms = 1;
+  float translation_ms = 2;
+  float total_ms = 3;
+}
+
+message TranscriptEvent {
+  string session_id = 1;
+  SpeakerRole speaker = 2;
+  bool is_final = 3;
+  string original_text = 4;
+  string translated_text = 5;
+  string source_language = 6;
+  string target_language = 7;
+  LatencyBreakdown latency = 8;
+  uint64 timestamp_us = 9;
+}
+
+message MetricsUpdate {
+  uint64 packets_sent = 1;
+  uint64 packets_received = 2;
+  float packet_loss_rate = 3;
+  float jitter_ms = 4;
+  float round_trip_ms = 5;
+  float audio_bitrate_kbps = 6;
+}
+
+message ErrorAlert {
+  int32 error_code = 1;
+  string error_message = 2;
+  string component = 3;
+}
+
+message ControlEnvelope {
+  MessageType type = 1;
+  uint64 timestamp_us = 2;
+  oneof payload {
+    SessionInitRequest session_init = 3;
+    ConfigUpdateRequest config_update = 4;
+    TranscriptEvent transcript_event = 5;
+    MetricsUpdate metrics = 6;
+    ErrorAlert error = 7;
+  }
+}

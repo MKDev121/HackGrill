@@ -1,0 +1,105 @@
+# ==============================================================================
+# Git Ignore for VoIP Translation App
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# Operating System & IDE Files
+# ------------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+ehthumbs.db
+[Nn]on[Rr]oaming/
+[Dd]esktop.ini
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ------------------------------------------------------------------------------
+# C++ / CMake / Visual Studio Build Artifacts
+# ------------------------------------------------------------------------------
+**/build/
+**/bin/
+**/out/
+**/x64/
+**/x86/
+**/Release/
+**/Debug/
+**/*.exe
+**/*.dll
+**/*.so
+**/*.dylib
+**/*.lib
+**/*.a
+**/*.obj
+**/*.o
+**/*.pdb
+**/*.idb
+**/*.ilk
+**/*.ipch
+**/*.tlog
+**/*.recipe
+**/*.log
+
+# Visual Studio
+.vs/
+*.vcxproj.user
+*.vcxproj.filters
+*.sln.docstates
+
+# CMake Artifacts
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+Makefile
+compile_commands.json
+
+# ------------------------------------------------------------------------------
+# Python Artifacts & Virtual Environments
+# ------------------------------------------------------------------------------
+**/venv/
+**/.venv/
+**/env/
+**/ENV/
+**/__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# Packaging
+*.egg-info/
+dist/
+*.egg
+
+# ------------------------------------------------------------------------------
+# Flutter / Dart Build Artifacts
+# ------------------------------------------------------------------------------
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+frontend/build/
+frontend/.dart_tool/
+frontend/windows/flutter/ephemeral/
+frontend/linux/flutter/ephemeral/
+frontend/macos/Flutter/ephemeral/
+
+# ------------------------------------------------------------------------------
+# Shared Memory & Temporary Run Files
+# ------------------------------------------------------------------------------
+*.sock
+*.pipe
+/dev/shm/voip_*
